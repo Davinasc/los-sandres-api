@@ -13,14 +13,8 @@ class SalonsSchema extends Schema {
         .references('id')
         .inTable('users')
         .onUpdate('CASCADE')
-      table
-        .string('name', 80)
-        .notNullable()
-        .unique()
-      table
-        .string('email', 255)
-        .notNullable()
-        .unique()
+      table.string('name', 80).notNullable()
+      table.string('email', 255).notNullable()
       table.string('phone', 80).notNullable()
       table.timestamps()
       table.timestamp('deleted_at')
