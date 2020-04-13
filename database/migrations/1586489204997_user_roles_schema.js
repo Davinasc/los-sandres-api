@@ -22,16 +22,16 @@ class UserRolesSchema extends Schema {
         .references('id')
         .inTable('user_roles')
         .onUpdate('CASCADE')
-        .onDelete('SET NULL')
     })
   }
 
   down () {
-    this.drop('user_roles')
     this.alter('users', table => {
       table.dropForeign('role_id')
       table.dropColumn('role_id')
     })
+
+    this.drop('user_roles')
   }
 }
 

@@ -1,36 +1,52 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
-
-/** @type {import('@adonisjs/framework/src/Hash')} */
-const Hash = use('Hash')
 
 class User extends Model {
   static boot () {
     super.boot()
 
-    /**
-     * A hook to hash the user password before saving
-     * it to the database.
-     */
-    this.addHook('beforeSave', async (userInstance) => {
-      if (userInstance.dirty.password) {
-        userInstance.password = await Hash.make(userInstance.password)
-      }
-    })
+    this.addHook('beforeSave', 'UserHook.hashPassword')
+    this.addHook('beforeCreate', 'UserHook.generateUsername')
+
+    this.addTrait('@provider:Lucid/SoftDeletes')
   }
 
-  /**
-   * A relationship on tokens is required for auth to
-   * work. Since features like `refreshTokens` or
-   * `rememberToken` will be saved inside the
-   * tokens table.
-   *
-   * @method tokens
-   *
-   * @return {Object}
-   */
+  static get computed () {
+    return ['fullname']
+  }
+
+  static get visible () {
+    return [
+      'id',
+      'first_name',
+      'last_name',
+      'fullname',
+      'username',
+      'phone',
+      'gender',
+      'birthdate',
+      'avatar_url'
+    ]
+  }
+
+  static get casts () {
+    return {
+      id: 'string',
+      first_name: 'string',
+      last_name: 'string',
+      username: 'string',
+      phone: 'string',
+      gender: 'string',
+      birthdate: 'string',
+      avatar_url: 'string'
+    }
+  }
+
+  getFullname ({ first_name: firstName, last_name: lastName }) {
+    return `${firstName} ${lastName}`
+  }
+
   tokens () {
     return this.hasMany('App/Models/Token')
   }

@@ -2,6 +2,8 @@
 
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
+Route.group(() => {
+  Route.resource('users', 'UserController')
+    .apiOnly()
+    .validator(new Map([['users.store', 'User']]))
+}).prefix('v1')

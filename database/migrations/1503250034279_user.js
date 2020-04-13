@@ -29,6 +29,7 @@ class UserSchema extends Schema {
         .defaultTo(false)
       table.string('phone', 80)
       table.string('avatar_url', 255)
+      table.date('birthdate')
       table.timestamps()
       table.timestamp('deleted_at')
     })
