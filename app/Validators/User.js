@@ -11,9 +11,9 @@ class User {
     return {
       first_name: 'required|string|min:2',
       last_name: 'required|string|min:2',
-      // username: 'required|string|unique:users',
       email: 'required|email|unique:users',
-      password: 'required|confirmed'
+      password: 'required|confirmed',
+      role_id: 'required|exists:user_roles,id'
     }
   }
 

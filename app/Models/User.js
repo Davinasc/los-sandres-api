@@ -26,7 +26,8 @@ class User extends Model {
       'phone',
       'gender',
       'birthdate',
-      'avatar_url'
+      'avatar_url',
+      'role_id'
     ]
   }
 
@@ -49,6 +50,10 @@ class User extends Model {
 
   tokens () {
     return this.hasMany('App/Models/Token')
+  }
+
+  role () {
+    return this.belongsTo('App/Models/UserRole')
   }
 }
 

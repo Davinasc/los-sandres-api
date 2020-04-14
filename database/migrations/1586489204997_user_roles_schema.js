@@ -19,6 +19,7 @@ class UserRolesSchema extends Schema {
       table
         .integer('role_id')
         .unsigned()
+        .notNullable()
         .references('id')
         .inTable('user_roles')
         .onUpdate('CASCADE')
