@@ -23,7 +23,6 @@ class User extends Model {
       'last_name',
       'fullname',
       'username',
-      'phone',
       'gender',
       'birthdate',
       'avatar_url',
