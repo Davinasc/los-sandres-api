@@ -2,6 +2,7 @@
 
 const User = use('App/Models/User')
 const Database = use('Database')
+const userRoles = require('../../../Shared/Constants/UserRoles')
 
 /**
  * Resourceful controller for interacting with users
@@ -16,11 +17,21 @@ class UserController {
   }
 
   async store ({ request }) {
-    const data = request.only(['first_name', 'last_name', 'email', 'password', 'role_id'])
+    const data = request.only([
+      'first_name',
+      'last_name',
+      'email',
+      'password',
+      'phone',
+      'avatar_url',
+      'gender'
+    ])
+
     const username = `${data.first_name}${data.last_name}`.toLowerCase().trim()
+    const role = userRoles.client
 
     const trx = await Database.beginTransaction()
-    const user = await User.create({ ...data, username }, trx)
+    const user = await User.create({ ...data, username, role_id: role }, trx)
     await trx.commit()
 
     await user.reload()
@@ -40,7 +51,31 @@ class UserController {
     }
   }
 
-  async update ({ params, request, response }) {}
+  async update ({ params, request, response }) {
+    try {
+      const data = request.only([
+        'first_name',
+        'last_name',
+        'email',
+        'role_id',
+        'phone',
+        'avatar_url',
+        'birthdate',
+        'gender'
+      ])
+
+      const user = await User.find(params.id)
+
+      if (!user) return response.status(400).json({ error: 'Usuário não encontrado' })
+
+      user.merge(data)
+      await user.save()
+
+      return user
+    } catch (err) {
+      return response.status(err.status).send({ error: 'Erro ao atualizar o usuário' })
+    }
+  }
 
   async destroy ({ params, response }) {
     const user = await User.find(params.id)
@@ -51,6 +86,12 @@ class UserController {
 
     return response.status(204).send()
   }
+
+  // TODO: Rota de confirmar e-mail
+
+  // TODO: Rota de solicitar nova senha
+
+  // TODO: Rota de atualizar a senha
 }
 
 module.exports = UserController

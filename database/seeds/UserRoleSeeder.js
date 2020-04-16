@@ -10,14 +10,14 @@
 |
 */
 
-const Factory = use('Factory')
-const Database = use('Database')
+const UserRole = use('App/Models/UserRole')
 
 class UserRoleSeeder {
   async run () {
-    await Factory.model('App/Models/UserRole').create()
+    await UserRole.create({ id: 1, name: 'client' })
+    await UserRole.create({ id: 2, name: 'admin' })
 
-    const userRoles = await Database.table('user_roles')
+    const userRoles = await UserRole.all()
     console.log(userRoles)
   }
 }

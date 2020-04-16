@@ -29,9 +29,3 @@ Factory.blueprint('App/Models/User', faker => {
     password: '123123'
   }
 })
-
-Factory.blueprint('App/Models/UserRole', faker => {
-  return {
-    name: faker.profession()
-  }
-})

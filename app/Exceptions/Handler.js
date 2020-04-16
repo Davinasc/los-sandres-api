@@ -2,7 +2,7 @@
 
 const BaseExceptionHandler = use('BaseExceptionHandler')
 const Youch = use('Youch')
-const { devEnv } = require('../shared/utils/env')
+const { devEnv } = require('../Shared/Utils/Env')
 
 /**
  * This class handles all exceptions thrown during

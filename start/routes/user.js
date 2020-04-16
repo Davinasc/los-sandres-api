@@ -13,8 +13,10 @@ Route.get('/:id', 'UserController.show')
 
 Route.put('/:id', 'UserController.update')
   .as('update')
-  .validator('User')
+  .validator(['Params/IdParam', 'User'])
 
 Route.delete('/:id', 'UserController.destroy')
   .validator('Params/IdParam')
   .as('destroy')
+
+// TODO: Rota de confirmar e-mail
