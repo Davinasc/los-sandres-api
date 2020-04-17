@@ -14,3 +14,10 @@ apiV1Group(
     .prefix('users')
     .as('user')
 )
+
+apiV1Group(
+  Route.group(() => require('./barber'))
+    .namespace('User')
+    .prefix('barbers')
+    .as('barber')
+)

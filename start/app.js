@@ -27,6 +27,7 @@ const providers = [
   '@radmen/adonis-lucid-soft-deletes/providers/SoftDeletesProvider',
   '@adonisjs/lucid-slugify/providers/SlugifyProvider',
   'adonis-cast-attributes/providers/CastAttributesProvider',
+  '@adonisjs/http-logger/providers/LoggerProvider',
   path.join(__dirname, '..', 'providers', 'CustomValidator', 'CustomValidatorProvider')
 ]
 

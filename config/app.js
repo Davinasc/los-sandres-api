@@ -92,7 +92,15 @@ module.exports = {
     | response.send('Hello', { ignoreEtag: true })
     |
     */
-    etag: false
+    etag: false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Logger Environment
+    |--------------------------------------------------------------------------
+    |
+    */
+    loggerEnv: ['development']
   },
 
   views: {

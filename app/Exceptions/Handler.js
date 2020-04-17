@@ -2,7 +2,7 @@
 
 const BaseExceptionHandler = use('BaseExceptionHandler')
 const Youch = use('Youch')
-const { devEnv } = require('../Shared/Utils/Env')
+const { devEnv } = require('../../shared/utils/env')
 
 /**
  * This class handles all exceptions thrown during
@@ -31,6 +31,12 @@ class ExceptionHandler extends BaseExceptionHandler {
       const youch = new Youch(error, request.request)
       const errJson = await youch.toJSON()
       return response.status(error.status).send(errJson)
+    }
+
+    if (error.status === 500) {
+      return response
+        .status(500)
+        .send({ message: 'Houve um erro no servidor, tente novamente em instantes' })
     }
 
     return response.status(error.status)

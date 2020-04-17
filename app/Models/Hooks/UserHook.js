@@ -3,6 +3,7 @@
 const Hash = use('Hash')
 const User = use('App/Models/User')
 const { v4: uuid } = require('uuid')
+const userRoles = require('../../../shared/constants/userRoles')
 
 const UserHook = (exports = module.exports = {})
 
@@ -25,4 +26,8 @@ UserHook.generateUsername = async user => {
   }
 
   return user
+}
+
+UserHook.generateUserRole = async user => {
+  user.role_id = userRoles.client
 }

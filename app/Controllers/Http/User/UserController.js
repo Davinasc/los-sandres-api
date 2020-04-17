@@ -2,7 +2,6 @@
 
 const User = use('App/Models/User')
 const Database = use('Database')
-const userRoles = require('../../../Shared/Constants/UserRoles')
 
 /**
  * Resourceful controller for interacting with users
@@ -28,10 +27,9 @@ class UserController {
     ])
 
     const username = `${data.first_name}${data.last_name}`.toLowerCase().trim()
-    const role = userRoles.client
 
     const trx = await Database.beginTransaction()
-    const user = await User.create({ ...data, username, role_id: role }, trx)
+    const user = await User.create({ ...data, username }, trx)
     await trx.commit()
 
     await user.reload()
@@ -57,7 +55,6 @@ class UserController {
         'first_name',
         'last_name',
         'email',
-        'role_id',
         'phone',
         'avatar_url',
         'birthdate',

@@ -8,6 +8,7 @@ class User extends Model {
 
     this.addHook('beforeSave', 'UserHook.hashPassword')
     this.addHook('beforeCreate', 'UserHook.generateUsername')
+    this.addHook('beforeCreate', 'UserHook.generateUserRole')
 
     this.addTrait('@provider:Lucid/SoftDeletes')
   }
@@ -25,8 +26,7 @@ class User extends Model {
       'username',
       'gender',
       'birthdate',
-      'avatar_url',
-      'role_id'
+      'avatar_url'
     ]
   }
 
@@ -53,6 +53,10 @@ class User extends Model {
 
   role () {
     return this.belongsTo('App/Models/UserRole')
+  }
+
+  barber () {
+    return this.hasOne('App/Models/Barber')
   }
 }
 
