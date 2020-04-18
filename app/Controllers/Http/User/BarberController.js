@@ -15,10 +15,32 @@ class BarberController {
     const barbers = await Barber.query()
       .with('user')
       .paginate(page, defaultPerPage)
+
     return barbers
   }
 
-  async store ({ request, response }) {}
+  async store ({ request }) {
+    const data = request.only([
+      'first_name',
+      'last_name',
+      'email',
+      'password',
+      'phone',
+      'avatar_url',
+      'gender'
+    ])
+
+    const username = `${data.first_name}${data.last_name}`.toLowerCase().trim()
+
+    const trx = await Database.beginTransaction()
+    const user = await User.create({ ...data, username }, trx)
+    const barber = await Barber.create({ user_id: user.id }, trx)
+    await trx.commit()
+
+    await barber.reload()
+
+    return barber
+  }
 
   async show ({ params, request, response, view }) {}
 

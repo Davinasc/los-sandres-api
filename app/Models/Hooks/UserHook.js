@@ -13,6 +13,8 @@ UserHook.hashPassword = async user => {
   }
 }
 
+// ! TODO: Alterar forma de gerar username
+// ! Dessa maneira o "finds" estão afetando a performance
 UserHook.generateUsername = async user => {
   const dbUser = await User.findBy('username', user.username)
   if (!dbUser) return

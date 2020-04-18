@@ -11,6 +11,14 @@ class Barber extends Model {
     return 'user_id'
   }
 
+  static get createdAtColumn () {
+    return null
+  }
+
+  static get updatedAtColumn () {
+    return null
+  }
+
   user () {
     return this.belongsTo('App/Models/User')
   }

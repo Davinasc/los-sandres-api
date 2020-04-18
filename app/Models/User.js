@@ -43,6 +43,10 @@ class User extends Model {
     }
   }
 
+  static scopeClients (query) {
+    return query.doesntHave('barber')
+  }
+
   getFullname ({ first_name: firstName, last_name: lastName }) {
     return `${firstName} ${lastName}`
   }

@@ -11,7 +11,9 @@ class UserController {
     const { page, perPage } = request.get()
     const defaultPerPage = perPage || 15
 
-    const users = await User.query().paginate(page, defaultPerPage)
+    const users = await User.query()
+      .clients()
+      .paginate(page, defaultPerPage)
     return users
   }
 
@@ -38,40 +40,35 @@ class UserController {
   }
 
   async show ({ params, response }) {
-    try {
-      const user = await User.find(params.id)
+    const user = await User.query()
+      .where('id', params.id)
+      .clients()
+      .fetch()
 
-      if (!user) return response.status(400).json({ error: 'Usuário não encontrado' })
+    if (!user) return response.status(400).json({ error: 'Usuário não encontrado' })
 
-      return user
-    } catch (err) {
-      return response.status(err.status).send({ error: 'Erro ao buscar o usuário' })
-    }
+    return user
   }
 
   async update ({ params, request, response }) {
-    try {
-      const data = request.only([
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'avatar_url',
-        'birthdate',
-        'gender'
-      ])
+    const data = request.only([
+      'first_name',
+      'last_name',
+      'email',
+      'phone',
+      'avatar_url',
+      'birthdate',
+      'gender'
+    ])
 
-      const user = await User.find(params.id)
+    const user = await User.find(params.id)
 
-      if (!user) return response.status(400).json({ error: 'Usuário não encontrado' })
+    if (!user) return response.status(400).json({ error: 'Usuário não encontrado' })
 
-      user.merge(data)
-      await user.save()
+    user.merge(data)
+    await user.save()
 
-      return user
-    } catch (err) {
-      return response.status(err.status).send({ error: 'Erro ao atualizar o usuário' })
-    }
+    return user
   }
 
   async destroy ({ params, response }) {
