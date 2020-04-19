@@ -34,18 +34,22 @@ class UserController {
     const user = await User.create({ ...data, username }, trx)
     await trx.commit()
 
+    // TODO: Adicionar envio de e-mail para o usuário na fila
+
     await user.reload()
 
     return user
   }
 
   async show ({ params, response }) {
-    const user = await User.query()
+    let user = await User.query()
       .where('id', params.id)
       .clients()
       .fetch()
 
-    if (!user) return response.status(400).json({ error: 'Usuário não encontrado' })
+    user = user.first()
+
+    if (!user) return response.status(400).json({ error: 'O usuário não foi encontrado' })
 
     return user
   }

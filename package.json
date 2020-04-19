@@ -32,6 +32,7 @@
     "@adonisjs/redis": "^2.0.7",
     "@adonisjs/validator": "^5.0.6",
     "@radmen/adonis-lucid-soft-deletes": "^0.2.0",
+    "adonis-bumblebee": "^2.2.0",
     "adonis-cast-attributes": "^1.0.0",
     "adonis-kue": "^5.0.1",
     "moment": "^2.24.0",

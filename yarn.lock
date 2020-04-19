@@ -373,6 +373,11 @@ acorn@^7.0.0, acorn@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.1.tgz#e35668de0b402f359de515c5482a1ab9f89a69bf"
   integrity sha512-add7dgA5ppRPxCFJoAGfMDi7PIBXq1RtGo7BhbLaxwrXPOmw8gq48Y9ozT01hUKy9byMjlR20EJhu5zlkErEkg==
 
+adonis-bumblebee@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/adonis-bumblebee/-/adonis-bumblebee-2.2.0.tgz#d959a973806df17efe3257c76b54f15f3477d9ed"
+  integrity sha512-NqwPBPIXmAlpOGZizvkwrtVzFXBoCWvfDFj1TE/NfyTFxRiCsYY6tTyBtyBz/Y4n2cYPTisg/x+ksZwZorzNvw==
+
 adonis-cast-attributes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/adonis-cast-attributes/-/adonis-cast-attributes-1.0.0.tgz#2039847f94fbf759e5c0541e4f5a4ec6a737b1f9"

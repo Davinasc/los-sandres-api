@@ -28,6 +28,7 @@ const providers = [
   '@adonisjs/lucid-slugify/providers/SlugifyProvider',
   'adonis-cast-attributes/providers/CastAttributesProvider',
   '@adonisjs/http-logger/providers/LoggerProvider',
+  'adonis-bumblebee/providers/BumblebeeProvider',
   path.join(__dirname, '..', 'providers', 'CustomValidator', 'CustomValidatorProvider')
 ]
 
@@ -40,7 +41,10 @@ const providers = [
 | Providers for migrations, tests etc.
 |
 */
-const aceProviders = ['@adonisjs/lucid/providers/MigrationsProvider']
+const aceProviders = [
+  '@adonisjs/lucid/providers/MigrationsProvider',
+  'adonis-bumblebee/providers/CommandsProvider'
+]
 
 /*
 |--------------------------------------------------------------------------
