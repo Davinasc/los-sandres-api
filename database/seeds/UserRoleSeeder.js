@@ -16,9 +16,6 @@ class UserRoleSeeder {
   async run () {
     await UserRole.create({ id: 1, name: 'client' })
     await UserRole.create({ id: 2, name: 'admin' })
-
-    const userRoles = await UserRole.all()
-    console.log(userRoles)
   }
 }
 

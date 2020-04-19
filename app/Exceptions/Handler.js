@@ -52,6 +52,10 @@ class ExceptionHandler extends BaseExceptionHandler {
    *
    * @return {void}
    */
+
+  // TODO: Criar integrações para disparar os logs de error
+  // TODO: Discord, slack, telegram, outros?
+
   async report (error, { request }) {
     console.log(error)
   }

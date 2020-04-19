@@ -2,16 +2,7 @@
 
 const BumblebeeTransformer = use('Bumblebee/Transformer')
 
-/**
- * BarberTransformer class
- *
- * @class BarberTransformer
- * @constructor
- */
 class BarberTransformer extends BumblebeeTransformer {
-  /**
-   * This method is used to transform the data.
-   */
   transform (barber) {
     const jsonBarber = barber.toJSON()
 

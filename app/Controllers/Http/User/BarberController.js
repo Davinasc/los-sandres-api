@@ -4,6 +4,9 @@ const Barber = use('App/Models/Barber')
 const User = use('App/Models/User')
 const Database = use('Database')
 
+// Shared
+const addPaginationLinks = require('../../../../shared/utils/addPaginationLinks')
+
 /**
  * Resourceful controller for interacting with clients
  */
@@ -16,7 +19,10 @@ class BarberController {
       .with('user')
       .paginate(page, defaultPerPage)
 
-    return transform.paginate(barbers, 'BarberTransformer')
+    const transformed = await transform.paginate(barbers, 'BarberTransformer')
+    transformed.pagination = addPaginationLinks(transformed)
+
+    return transformed
   }
 
   async store ({ request, transform }) {
@@ -78,8 +84,6 @@ class BarberController {
     barber.merge(data)
     await barber.save()
     await barber.load('barber')
-
-    console.log(barber.toJSON())
 
     return transform.item(barber, 'BarberTransformer')
   }

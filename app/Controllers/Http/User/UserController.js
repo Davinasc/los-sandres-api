@@ -3,18 +3,25 @@
 const User = use('App/Models/User')
 const Database = use('Database')
 
+// Shared
+const addPaginationLinks = require('../../../../shared/utils/addPaginationLinks')
+
 /**
  * Resourceful controller for interacting with users
  */
 class UserController {
-  async index ({ request }) {
+  async index ({ request, transform }) {
     const { page, perPage } = request.get()
     const defaultPerPage = perPage || 15
 
     const users = await User.query()
       .clients()
       .paginate(page, defaultPerPage)
-    return users
+
+    const transformed = await transform.paginate(users, 'UserTransformer')
+    transformed.pagination = addPaginationLinks(transformed) || transformed.pagination
+
+    return transformed
   }
 
   async store ({ request }) {

@@ -12,14 +12,10 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory')
-const Database = use('Database')
 
 class UserSeeder {
   async run () {
     await Factory.model('App/Models/User').create()
-
-    const users = await Database.table('users')
-    console.log(users)
   }
 }
 
