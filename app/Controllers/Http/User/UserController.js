@@ -19,7 +19,8 @@ class UserController {
       .paginate(page, defaultPerPage)
 
     const transformed = await transform.paginate(users, 'UserTransformer')
-    transformed.pagination = addPaginationLinks(transformed) || transformed.pagination
+    transformed.pagination =
+      addPaginationLinks(transformed, request.url()) || transformed.pagination
 
     return transformed
   }

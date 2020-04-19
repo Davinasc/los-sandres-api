@@ -20,7 +20,7 @@ class BarberController {
       .paginate(page, defaultPerPage)
 
     const transformed = await transform.paginate(barbers, 'BarberTransformer')
-    transformed.pagination = addPaginationLinks(transformed)
+    transformed.pagination = addPaginationLinks(transformed, request.url())
 
     return transformed
   }
