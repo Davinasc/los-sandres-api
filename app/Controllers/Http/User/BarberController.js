@@ -14,10 +14,11 @@ class BarberController {
   async index ({ request, transform }) {
     const { page, perPage } = request.get()
     const defaultPerPage = perPage || 15
+    const defaultPage = page || 1
 
     const barbers = await Barber.query()
       .with('user')
-      .paginate(page, defaultPerPage)
+      .paginate(defaultPage, defaultPerPage)
 
     const transformed = await transform.paginate(barbers, 'BarberTransformer')
     transformed.pagination = addPaginationLinks(transformed, request.url())
@@ -61,6 +62,7 @@ class BarberController {
 
     barber = barber.first()
 
+    // TODO: Adicionar internacionalização
     if (!barber) return response.status(400).json({ error: 'O barbeiro não foi encontrado' })
 
     return transform.item(barber, 'BarberTransformer')
@@ -79,7 +81,8 @@ class BarberController {
 
     const barber = await User.find(params.id)
 
-    if (!barber) return response.status(400).json({ error: 'Usuário não encontrado' })
+    // TODO: Adicionar internacionalização
+    if (!barber) return response.status(400).json({ error: 'O barbeiro não foi encontrado' })
 
     barber.merge(data)
     await barber.save()
@@ -96,7 +99,8 @@ class BarberController {
 
     barber = barber.first()
 
-    if (!barber) return response.status(400).json({ error: 'Usuário não encontrado' })
+    // TODO: Adicionar internacionalização
+    if (!barber) return response.status(400).json({ error: 'O barbeiro não foi encontrado' })
 
     await barber.delete()
     await barber.user().delete()

@@ -8,6 +8,9 @@ apiV1Group(Route.get('/health', ({ response }) => response.json({ message: 'Ok' 
 
 // TODO: Adicionar middleware de autenticação & autorização
 
+// TODO: Adicionar forma de cadastrar endereços
+
+// Clients
 apiV1Group(
   Route.group(() => require('./user'))
     .namespace('User')
@@ -15,9 +18,17 @@ apiV1Group(
     .as('user')
 )
 
+// Barbers
 apiV1Group(
   Route.group(() => require('./barber'))
     .namespace('User')
     .prefix('barbers')
     .as('barber')
+)
+
+// Salon
+apiV1Group(
+  Route.group(() => require('./salon'))
+    .prefix('salons')
+    .as('salon')
 )

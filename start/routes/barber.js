@@ -4,7 +4,7 @@ Route.get('/', 'BarberController.index').as('index')
 
 Route.post('/', 'BarberController.store')
   .as('store')
-  .validator('User')
+  .validator('User/StoreUser')
 
 Route.get('/:id', 'BarberController.show')
   .as('show')
@@ -12,7 +12,7 @@ Route.get('/:id', 'BarberController.show')
 
 Route.put('/:id', 'BarberController.update')
   .as('update')
-  .validator(['Params/IdParam', 'User'])
+  .validator('User/UpdateUser')
 
 Route.delete('/:id', 'BarberController.destroy')
   .validator('Params/IdParam')

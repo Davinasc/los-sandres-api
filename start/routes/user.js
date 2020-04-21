@@ -4,7 +4,7 @@ Route.get('/', 'UserController.index').as('index')
 
 Route.post('/', 'UserController.store')
   .as('store')
-  .validator('User')
+  .validator('User/StoreUser')
 
 Route.get('/:id', 'UserController.show')
   .as('show')
@@ -13,10 +13,12 @@ Route.get('/:id', 'UserController.show')
 
 Route.put('/:id', 'UserController.update')
   .as('update')
-  .validator(['Params/IdParam', 'User'])
+  .validator(['User/UpdateUser'])
 
 Route.delete('/:id', 'UserController.destroy')
   .validator('Params/IdParam')
   .as('destroy')
 
 // TODO: Rota de confirmar e-mail
+
+// TODO: Rota de tornar o usuário um barbeiro

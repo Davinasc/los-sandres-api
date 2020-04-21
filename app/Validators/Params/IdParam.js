@@ -12,10 +12,9 @@ class IdParam {
   }
 
   get data () {
+    const { id } = this.ctx.params
     const requestBody = this.ctx.request.all()
-    const id = this.ctx.params.id
-
-    return Object.assign({}, requestBody, { id })
+    return { id, ...requestBody }
   }
 }
 

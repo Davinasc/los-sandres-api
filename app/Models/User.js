@@ -62,6 +62,10 @@ class User extends Model {
   barber () {
     return this.hasOne('App/Models/Barber')
   }
+
+  salons () {
+    return this.hasMany('App/Models/Salon')
+  }
 }
 
 module.exports = User

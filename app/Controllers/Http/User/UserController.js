@@ -13,10 +13,11 @@ class UserController {
   async index ({ request, transform }) {
     const { page, perPage } = request.get()
     const defaultPerPage = perPage || 15
+    const defaultPage = page || 1
 
     const users = await User.query()
       .clients()
-      .paginate(page, defaultPerPage)
+      .paginate(defaultPage, defaultPerPage)
 
     const transformed = await transform.paginate(users, 'UserTransformer')
     transformed.pagination =
@@ -57,7 +58,8 @@ class UserController {
 
     user = user.first()
 
-    if (!user) return response.status(400).json({ error: 'O usuário não foi encontrado' })
+    // TODO: Adicionar internacionalização
+    if (!user) return response.status(400).json({ error: 'O cliente não foi encontrado' })
 
     return user
   }
@@ -73,9 +75,15 @@ class UserController {
       'gender'
     ])
 
-    const user = await User.find(params.id)
+    let user = await User.query()
+      .where('id', params.id)
+      .clients()
+      .fetch()
 
-    if (!user) return response.status(400).json({ error: 'Usuário não encontrado' })
+    user = user.first()
+
+    // TODO: Adicionar internacionalização
+    if (!user) return response.status(400).json({ error: 'O cliente não foi encontrado' })
 
     user.merge(data)
     await user.save()
@@ -84,9 +92,15 @@ class UserController {
   }
 
   async destroy ({ params, response }) {
-    const user = await User.find(params.id)
+    let user = await User.query()
+      .where('id', params.id)
+      .clients()
+      .fetch()
 
-    if (!user) return response.status(400).json({ error: 'Usuário não encontrado' })
+    user = user.first()
+
+    // TODO: Adicionar internacionalização
+    if (!user) return response.status(400).json({ error: 'O cliente não foi encontrado' })
 
     user.delete()
 

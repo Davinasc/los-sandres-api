@@ -12,6 +12,7 @@ class BarbersSchema extends Schema {
         .references('id')
         .inTable('users')
         .primary()
+        .unique()
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
       table.float('average_rating', 1)
