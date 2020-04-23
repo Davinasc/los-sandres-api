@@ -12,7 +12,7 @@ apiV1Group(Route.get('/health', ({ response }) => response.json({ message: 'Ok' 
 
 // Clients
 apiV1Group(
-  Route.group(() => require('./user'))
+  Route.group(() => require('./user/user'))
     .namespace('User')
     .prefix('users')
     .as('user')
@@ -20,7 +20,7 @@ apiV1Group(
 
 // Barbers
 apiV1Group(
-  Route.group(() => require('./barber'))
+  Route.group(() => require('./user/barber'))
     .namespace('User')
     .prefix('barbers')
     .as('barber')
@@ -28,7 +28,16 @@ apiV1Group(
 
 // Salon
 apiV1Group(
-  Route.group(() => require('./salon'))
+  Route.group(() => require('./salon/salon'))
+    .namespace('Salon')
     .prefix('salons')
     .as('salon')
+)
+
+// Salon Services
+apiV1Group(
+  Route.group(() => require('./salon/salonServices'))
+    .namespace('Salon')
+    .prefix('salons/:salonId/services')
+    .as('salonServices')
 )

@@ -48,8 +48,12 @@ class SalonController {
     // TODO: Adicionar internacionalização
     if (!salon) return response.status(400).json({ error: 'O salão não foi encontrado' })
 
+    const trx = await Database.beginTransaction()
+
     salon.merge(data)
-    await salon.save()
+    await salon.save(trx)
+
+    trx.commit()
 
     return salon
   }

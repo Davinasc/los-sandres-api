@@ -8,15 +8,15 @@ class Salon extends Model {
   }
 
   static get hidden () {
-    return ['user_id', 'created_by_user']
-  }
-
-  static scopeUserSalon (query) {
-    return query.doesntHave('barber')
+    return ['user_id', 'created_by_user', 'deleted_at', 'created_at', 'updated_at']
   }
 
   user () {
     return this.belongsTo('App/Models/User/User')
+  }
+
+  services () {
+    return this.hasMany('App/Models/Salon/SalonService')
   }
 }
 

@@ -3,27 +3,27 @@
 const BumblebeeTransformer = use('Bumblebee/Transformer')
 
 class BarberTransformer extends BumblebeeTransformer {
-  transform (barber) {
-    const jsonBarber = barber.toJSON()
+  transform (model) {
+    const barber = model.toJSON()
 
-    if (jsonBarber.user) {
-      const newBarber = {
-        ...jsonBarber,
-        ...jsonBarber.user,
+    if (barber.user) {
+      const tBarber = {
+        ...barber,
+        ...barber.user,
         user: undefined,
         user_id: undefined
       }
-      return newBarber
+      return tBarber
     }
 
-    if (jsonBarber.barber) {
-      const newBarber = {
-        ...jsonBarber,
-        ...jsonBarber.barber,
+    if (barber.barber) {
+      const tBarber = {
+        ...barber,
+        ...barber.barber,
         barber: undefined,
         user_id: undefined
       }
-      return newBarber
+      return tBarber
     }
   }
 }

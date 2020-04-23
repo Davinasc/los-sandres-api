@@ -2,7 +2,7 @@
 
 const Antl = use('Antl')
 
-class Salon {
+class UpdateSalon {
   get validateAll () {
     return true
   }
@@ -27,4 +27,4 @@ class Salon {
   }
 }
 
-module.exports = Salon
+module.exports = UpdateSalon

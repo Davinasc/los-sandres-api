@@ -2,16 +2,16 @@
 
 const Antl = use('Antl')
 
-class StoreSalon {
+class UpdateStore {
   get validateAll () {
     return true
   }
 
   get rules () {
     return {
-      name: 'required|string|min:2|max:80',
-      email: 'email|max:255|unique:salons',
-      phone: 'string|min:10|max:80'
+      name: 'string|min:2|max:100',
+      description: 'string|min:5|max:512',
+      price: 'number|min:0'
     }
   }
 
@@ -20,4 +20,4 @@ class StoreSalon {
   }
 }
 
-module.exports = StoreSalon
+module.exports = UpdateStore

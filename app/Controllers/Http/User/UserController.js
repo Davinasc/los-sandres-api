@@ -85,8 +85,12 @@ class UserController {
     // TODO: Adicionar internacionalização
     if (!user) return response.status(400).json({ error: 'O cliente não foi encontrado' })
 
+    const trx = await Database.beginTransaction()
+
     user.merge(data)
-    await user.save()
+    await user.save(trx)
+
+    trx.commit()
 
     return user
   }
@@ -102,7 +106,9 @@ class UserController {
     // TODO: Adicionar internacionalização
     if (!user) return response.status(400).json({ error: 'O cliente não foi encontrado' })
 
-    user.delete()
+    const trx = await Database.beginTransaction()
+    await user.delete(trx)
+    trx.commit()
 
     return response.status(204).send()
   }
