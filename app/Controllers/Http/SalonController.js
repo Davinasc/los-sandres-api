@@ -1,7 +1,7 @@
 'use strict'
 
-const Salon = use('App/Models/Salon')
-const User = use('App/Models/User')
+const Salon = use('App/Models/Salon/Salon')
+const User = use('App/Models/User/User')
 const Database = use('Database')
 
 class SalonController {

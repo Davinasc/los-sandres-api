@@ -13,7 +13,7 @@
 
 const Factory = use('Factory')
 
-Factory.blueprint('App/Models/User', faker => {
+Factory.blueprint('App/Models/User/User', faker => {
   const firstName = faker.first()
   const lastName = faker.last()
 

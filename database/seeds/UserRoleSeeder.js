@@ -10,7 +10,7 @@
 |
 */
 
-const UserRole = use('App/Models/UserRole')
+const UserRole = use('App/Models/User/UserRole')
 
 class UserRoleSeeder {
   async run () {

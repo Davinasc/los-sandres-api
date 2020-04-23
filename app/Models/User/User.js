@@ -56,15 +56,15 @@ class User extends Model {
   }
 
   role () {
-    return this.belongsTo('App/Models/UserRole')
+    return this.belongsTo('App/Models/User/UserRole')
   }
 
   barber () {
-    return this.hasOne('App/Models/Barber')
+    return this.hasOne('App/Models/User/Barber')
   }
 
   salons () {
-    return this.hasMany('App/Models/Salon')
+    return this.hasMany('App/Models/Salon/Salon')
   }
 }
 

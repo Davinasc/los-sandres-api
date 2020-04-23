@@ -1,7 +1,7 @@
 'use strict'
 
 const Hash = use('Hash')
-const User = use('App/Models/User')
+const User = use('App/Models/User/User')
 const { v4: uuid } = require('uuid')
 const userRoles = require('../../../shared/constants/userRoles')
 

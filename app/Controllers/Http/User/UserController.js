@@ -1,6 +1,6 @@
 'use strict'
 
-const User = use('App/Models/User')
+const User = use('App/Models/User/User')
 const Database = use('Database')
 
 // Shared

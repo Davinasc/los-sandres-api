@@ -1,7 +1,7 @@
 'use strict'
 
-const Barber = use('App/Models/Barber')
-const User = use('App/Models/User')
+const Barber = use('App/Models/User/Barber')
+const User = use('App/Models/User/User')
 const Database = use('Database')
 
 // Shared
