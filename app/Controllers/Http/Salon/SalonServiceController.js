@@ -8,16 +8,17 @@ const Database = use('Database')
 const addPaginationLinks = require('../../../../shared/utils/addPaginationLinks')
 
 class SalonServiceController {
-  async index ({ request, transform }) {
+  async index ({ params, request, transform }) {
     const { page, perPage } = request.get()
     const defaultPerPage = perPage || 15
     const defaultPage = page || 1
 
-    const barbers = await SalonService.query()
+    const services = await SalonService.query()
+      .where('salon_id', params.salonId)
       .with('salon')
       .paginate(defaultPage, defaultPerPage)
 
-    const transformed = await transform.paginate(barbers, 'SalonServiceTransformer')
+    const transformed = await transform.paginate(services, 'SalonServiceTransformer')
     transformed.pagination = addPaginationLinks(transformed, request.url())
 
     return transformed
@@ -30,7 +31,7 @@ class SalonServiceController {
 
     const salon = await Salon.find(params.salonId)
 
-    if (!salon) return response.status(400).json({ error: 'O salão não foi encontrado' })
+    if (!salon) return response.status(400).json({ message: 'O salão não foi encontrado' })
 
     const service = await salon.services().create(data, trx)
 
@@ -52,7 +53,7 @@ class SalonServiceController {
     service = service.first()
 
     // TODO: Adicionar internacionalização
-    if (!service) return response.status(400).json({ error: 'O serviço não foi encontrado' })
+    if (!service) return response.status(400).json({ message: 'O serviço não foi encontrado' })
 
     return transform.item(service, 'SalonServiceTransformer')
   }
@@ -68,7 +69,7 @@ class SalonServiceController {
 
     service = service.first()
 
-    if (!service) return response.status(400).json({ error: 'O serviço não foi encontrado' })
+    if (!service) return response.status(400).json({ message: 'O serviço não foi encontrado' })
 
     const trx = await Database.beginTransaction()
 
@@ -90,7 +91,7 @@ class SalonServiceController {
     service = service.first()
 
     // TODO: Adicionar internacionalização
-    if (!service) return response.status(400).json({ error: 'O serviço não foi encontrado' })
+    if (!service) return response.status(400).json({ message: 'O serviço não foi encontrado' })
 
     const trx = await Database.beginTransaction()
 

@@ -2,17 +2,25 @@
 
 const Antl = use('Antl')
 
-class UpdateStore {
+class UpdateService {
   get validateAll () {
     return true
   }
 
   get rules () {
     return {
+      salonId: 'required|integer',
+      id: 'required|integer',
       name: 'string|min:2|max:100',
       description: 'string|min:5|max:512',
       price: 'number|min:0'
     }
+  }
+
+  get data () {
+    const { salonId, id } = this.ctx.params
+    const requestBody = this.ctx.request.all()
+    return { salonId, id, ...requestBody }
   }
 
   get messages () {
@@ -20,4 +28,4 @@ class UpdateStore {
   }
 }
 
-module.exports = UpdateStore
+module.exports = UpdateService

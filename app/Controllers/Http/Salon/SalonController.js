@@ -31,7 +31,7 @@ class SalonController {
       .first()
 
     // TODO: Adicionar internacionalização
-    if (!salon) return response.status(400).json({ error: 'O salão não foi encontrado' })
+    if (!salon) return response.status(400).json({ message: 'O salão não foi encontrado' })
 
     return salon
   }
@@ -46,7 +46,7 @@ class SalonController {
       .first()
 
     // TODO: Adicionar internacionalização
-    if (!salon) return response.status(400).json({ error: 'O salão não foi encontrado' })
+    if (!salon) return response.status(400).json({ message: 'O salão não foi encontrado' })
 
     const trx = await Database.beginTransaction()
 

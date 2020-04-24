@@ -63,7 +63,7 @@ class BarberController {
     barber = barber.first()
 
     // TODO: Adicionar internacionalização
-    if (!barber) return response.status(400).json({ error: 'O barbeiro não foi encontrado' })
+    if (!barber) return response.status(400).json({ message: 'O barbeiro não foi encontrado' })
 
     return transform.item(barber, 'BarberTransformer')
   }
@@ -82,7 +82,7 @@ class BarberController {
     const barber = await User.find(params.id)
 
     // TODO: Adicionar internacionalização
-    if (!barber) return response.status(400).json({ error: 'O barbeiro não foi encontrado' })
+    if (!barber) return response.status(400).json({ message: 'O barbeiro não foi encontrado' })
 
     const trx = await Database.beginTransaction()
 
@@ -105,7 +105,7 @@ class BarberController {
     barber = barber.first()
 
     // TODO: Adicionar internacionalização
-    if (!barber) return response.status(400).json({ error: 'O barbeiro não foi encontrado' })
+    if (!barber) return response.status(400).json({ message: 'O barbeiro não foi encontrado' })
 
     const trx = await Database.beginTransaction()
 

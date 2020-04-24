@@ -59,7 +59,7 @@ class UserController {
     user = user.first()
 
     // TODO: Adicionar internacionalização
-    if (!user) return response.status(400).json({ error: 'O cliente não foi encontrado' })
+    if (!user) return response.status(400).json({ message: 'O cliente não foi encontrado' })
 
     return user
   }
@@ -83,7 +83,7 @@ class UserController {
     user = user.first()
 
     // TODO: Adicionar internacionalização
-    if (!user) return response.status(400).json({ error: 'O cliente não foi encontrado' })
+    if (!user) return response.status(400).json({ message: 'O cliente não foi encontrado' })
 
     const trx = await Database.beginTransaction()
 
@@ -104,7 +104,7 @@ class UserController {
     user = user.first()
 
     // TODO: Adicionar internacionalização
-    if (!user) return response.status(400).json({ error: 'O cliente não foi encontrado' })
+    if (!user) return response.status(400).json({ message: 'O cliente não foi encontrado' })
 
     const trx = await Database.beginTransaction()
     await user.delete(trx)

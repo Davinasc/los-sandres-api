@@ -2,7 +2,7 @@
 
 const Antl = use('Antl')
 
-class StoreService {
+class SalonService {
   get validateAll () {
     return true
   }
@@ -10,10 +10,7 @@ class StoreService {
   get rules () {
     return {
       salonId: 'required|integer',
-      id: 'required|integer',
-      name: 'required|string|min:2|max:100',
-      description: 'string|min:5|max:512',
-      price: 'number|min:0'
+      id: 'required|integer'
     }
   }
 
@@ -28,4 +25,4 @@ class StoreService {
   }
 }
 
-module.exports = StoreService
+module.exports = SalonService
